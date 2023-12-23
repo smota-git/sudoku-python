@@ -1,0 +1,16 @@
+from sudoku_hlp import *
+
+help(insert_initial_values)
+help(search_position_index)
+help(can_be_in_line)
+help(can_be_in_column)
+help(can_be_in_cell)
+help(count_in_line)
+help(count_in_column)
+help(count_in_cell)
+help(interchange_vectors)
+help(bubblesort)
+help(adjust_acceptable_values)
+help(find_hidden_singles)
+help(main_iteration)
+help(main)
