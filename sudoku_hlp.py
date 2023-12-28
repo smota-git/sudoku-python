@@ -1,188 +1,190 @@
 def insert_initial_values(initial_layout):
     """
-    funkce pro zadání počátečních podmínek (za předpokladu, že nejsou zadány přímo v kódu)
+    function for entry of initial conditions (assuming that they are not entered to code directly)
 
-    Parametry:
-    - initial_layout (np.array): počáteční rozložení číslic
+    Parameters:
+    - initial_layout (np.array): initial layout of digits
     """
 
 def search_position_index(i, j, ListOfLists2):
     """
-    funkce pro vyhledání pořadového čísla pozice s danými souřadnicemi pozice v příslušném složeném vektoru
+    function for searching of order number of position with given coordinates of position in corresponding composite vector
 
-    Parametry:
-    - i (int): souřadnice řádku (od O)
-    - j (int): souřadnice sloupce (od O)
-    - ListOfLists2 (2D list): vektor souřadnic pozic v uspořádaném vektoru přípustných čísel
+    Parameters:
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - ListOfLists2 (2D list): list of coordinates of positions in ordered vector of acceptable digits
 
-    Výstup:
-    - k (int): pořadové číslo pozice v aktuálním uspořádání
+    Output:
+    - k (int): order number of position in current ordering
     """
 
 def can_be_in_line(q, i, j, ar):
     """
-    test, zda s ohledem na rozložení číslic v daném ŘÁDKU může daná pozice obsahovat konkrétní číslo
+    test if regarding the digits ordering in given LINE the given position can include a concrete digit
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - ar (np.array): zkoumané rozložení číslic
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - ar (np.array): investigated layout of digits
 
-    Výstup:
-    - True nebo False
+    Output:
+    - True or False
     """
 
 def can_be_in_column(q, i, j, ar):
     """
-    test, zda s ohledem na rozložení číslic v daném SLOUPCI může daná pozice obsahovat konkrétní číslo
+    test if regarding the digits ordering in given COLUMN the given position can include a concrete digit
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - ar (np.array): zkoumané rozložení číslic
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - ar (np.array): investigated layout of digits
 
-    Výstup:
-    - True nebo False
+    Output:
+    - True or False
     """
 
 def can_be_in_cell(q, i, j, ar):
     """
-    test, zda s ohledem na rozložení číslic v dané BUŇCE může daná pozice obsahovat konkrétní číslo
+    test if regarding the digits ordering in given CELL the given position can include a concrete digit
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - ar (np.array): zkoumané rozložení číslic
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - ar (np.array): investigated layout of digits
 
-    Výstup:
-    - True nebo False
+    Output:
+    - True or False
     """
 
 def count_in_line(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
-    zjištění počtu pozic v daném ŘÁDKU, které mohou obsahovat konkrétní  číslo
+    counting of number of positions in given LINE which can include a concrete digit
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - temp (np.array): zkoumané rozložení číslic
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - temp (np.array): investigated layout of digits
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
 
-    Výstup:
-    - count (int): počet pozic s danou vlastností
+    Output:
+    - count (int): number of positions with given property
     """
 
 def count_in_column(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
-    zjištění počtu pozic v daném SLOUPCI, které mohou obsahovat konkrétní  číslo
+    counting of number of positions in given COLUMN which can include a concrete digit
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - temp (np.array): zkoumané rozložení číslic
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - temp (np.array): investigated layout of digits
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
 
-    Výstup:
-    - count (int): počet pozic s danou vlastností
+    Output:
+    - count (int): number of positions with given property
     """
 
 def count_in_cell(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
-    zjištění počtu pozic v dané BUŇCE, které mohou obsahovat konkrétní  číslo
+    counting of number of positions in given CELL which can include a concrete digit
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - temp (np.array): zkoumané rozložení číslic
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - temp (np.array): investigated layout of digits
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
 
-    Výstup:
-    - count (int): počet pozic s danou vlastností
+    Output:
+    - count (int): number of positions with given property
     """
 
 def interchange_vectors(a, b, ListOfLists):
     """
-    prohození složek 2D-seznamů v rámci bubblesortu
+    interchange of components of 2D-vectors within bubblesort algorithm
 
-    Parametry:
-    - a (int): pořadové číslo první prohazované pozice
-    - b (int): pořadové číslo druhé prohazované pozice
-    - ListOfLists (2D list): uspořádávaný 2D-seznam
+    Parameters:
+    - a (int): order number of first interchanging position
+    - b (int): order number of second interchanging position
+    - ListOfLists (2D list): sorting 2D-list
     """
 
 def bubblesort(ListOfLists1, ListOfLists2):
     """
-    algoritmus bubblesort - uspořádává složky (tvořené seznamy) daných 2D-seznamů podle velikosti (počtu prvků obsažených v jednotlivých složkách)
+    algorithm bubblesort - it orders components (created by lists) of given 2D-lists according to the size (number of digits included in particular components)
 
-    Parametry:
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
+    Parameters:
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
     """
 
 def adjust_acceptable_values(q, i, j, ListOfLists1, ListOfLists2):
     """
-    při výběru čísla pro vyplnění dané pozice se zde odpovídající číslo vyškrtává ze seznamu přípustných čísel pro všechny ostatní
-    pozice nacházející se ve stejném řádku, sloupci a buňce; následně jsou složky příslušných 2D-seznamů, jejichž velikost se vynuluje,
-    vyloučeny
+    during choice of digit for given position the corresponding number is erased here from list of acceptable digits for all other
+    positions located in the same line, column and cell; after that the components of corresponding 2D-lists whose size is eliminated
+    are excluded
 
-    Parametry:
-    - q (int): zkoumané číslo
-    - i (int): souřadnice řádku (od 0)
-    - j (int): souřadnice sloupce (od 0)
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
+    Parameters:
+    - q (int): investigated digit
+    - i (int): coordinates of line (from 0)
+    - j (int): coordinates of column (from 0)
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
     """
 
 def find_hidden_singles(temp, ListOfLists1, ListOfLists2):
     """
-    další zefektivnění: pro účely zjednodušení na základě zjištěných přípustných číslic hledáme případné pozice, které jako jediné
-    připouštějí umístění některých číslic v rámci daného řádku, sloupce nebo buňky (tzv. skrytý singl)
+    next improvement: for the purpose of simplification on the base of found acceptable digits we search possible positions which
+    are the only admitting location of some digits within given line, column or cell (so-called hidden single)
 
-    Parametry:
-    - temp (np.array): zkoumané rozložení číslic
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
+    Parameters:
+    - temp (np.array): investigated number layout
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
     """
 
 def main_iteration(ar, ListOfLists1, ListOfLists2, ptemp_size, previous_temp, previous_acceptable_values,
                    previous_index_order):
     """
-    hlavní iterace: pro zefektivnění výpočtu jsou na začátku 2D-vektory přípustných číslic seřazeny podle velikosti; funkce dále
-    vybírá číslo pro vyplnění aktuální pozice a kontroluje, jestli pro danou volbu nedojde k vyškrtnutí některých složek odpovídajících
-    dosud nevyplněným pozicím z vektoru přípustných číslic (a tedy pro stávající volbu obsazení nevyplněných pozic úloha nemá řešení);
-    pokud ano, je vybrána jiná číslice (která projde stejným kontrolním mechanizmem), pokud ne, vyhledáme nejdřív případné skryté singly,
-    a pokud se tím příznivý případ nenaruší, je dané rozložení číslic spolu s vektorem přípustných číslic (zmenšeným o číslici aktuálně
-    vybranou) zapsáno do alternativ (pro případ, že se daná volba nakonec stejně ukáže ve výsledku nevyhovující v některé z dalších
-    iterací); jestliže se všechny přípustné číslice odpovídající dané pozici nakonec ukážou být nevyhovující, je z alternativ vyvolán
-    poslední případ, kdy byla číslice pro některou z předchozích pozic vybrána z více možností a spolu s rozložením čísel a vektorem
-    přípustných možností odpovídajících této předešlé situaci je vybrána kombinace parametrů pro další iteraci
+    main iteration: for improvement of calculation, initially, the 2D-lists of acceptable digits are ordered by size; next, the
+    function chooses the digit for filling the actual position and controls if for given choice some components corresponding to
+    not yet filled positions from the list of acceptable digits are not erased (which means that for actual choice of occupation
+    of yet unfilled positions the task has no solution); if yes, we choose another digit (which undergoes the same control mechanism),
+    if no, we first find possible hidden singles and if this does not corrupt the favorable case, the given digit layout is together
+    with list of acceptable digits (reduced by currently selected digit) added to alternates (this serves for the case that given
+    choice will not finally appear suitable in any of next iterations); if, finally, all acceptable digits corresponding to given
+    position will not appear suitable we choose from alternates the last case when the digit was for any of the previous positions
+    chosen from more possibilities and we choose the combination of parameters for next iteration together with layout of digits and
+    list of acceptable possibilities corresponding to this previous situation
 
-    Parametry:
-    - ar (np.array): zkoumané rozložení číslic
-    - ListOfLists1 (2D list): vektor přípustných čísel na jednotlivých pozicích
-    - ListOfLists2 (2D list): souřadnice pozic ve vektoru přípustných čísel
-    - ptemp_size (int): počet pozic připouštějících alternativní kombinace parametrů pro případ, že se dostaneme do sporu
-    - previous_temp (3D list): rozložení číslic odpovídající alternativám
-    - previous_acceptable_values (3D list): přípustné číslice odpovídající alternativám
-    - previous_temp (3D list): souřadnice pozic odpovídajících alternativám
+    Parameters:
+    - ar (np.array): investigated layout of digits
+    - ListOfLists1 (2D list): list of acceptable digits at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ptemp_size (int): number of positions admitting alternating combinations of parameters for the case when we achieve the contradiction
+    - previous_temp (3D list): layouts of digits corresponding to alternates
+    - previous_acceptable_values (3D list): acceptable digits corresponding to alternates
+    - previous_temp (3D list): coordinates to positions corresponding to alternates
 
-    Výstup:
-    - ptemp_size (int): aktualizovaný počet pozic připouštějících alternativní kombinace parametrů
+    Output:
+    - ptemp_size (int): actualized number of positions admitting alternating combinations of parameters
     """
 
 def main():
     """
-    hlavní blok: ze vstupních hodnot (zadaných ručně nebo z kódu) vytvoří z booleanovských funkcí na začátku kódu 2D-seznamy
-    acceptable_values a index_order obsahující výčet čísel, které mohou obsadit jednotlivé pozice, toto je ještě následně upraveno
-    hledáním skrytých singlů, čímž se výčet ještě o něco zjednoduší; po uspořádání spustím hlavní cyklus, který běží tak dlouho,
-    dokud není obsazena poslední pozice (v takovém případě dojde k vymazání veškerých hodnot z 2D-seznamu acceptable_values)
+    main block: from the initial values (entered manually or directly from code) it creates from boolean functions at the
+    beginning of code the 2D-lists named acceptable_values and indices_order containing the list of digits which can occupy the
+    particular positions, this will be afterwards adjusted by searching hidden singles, this will simplify the 2D-lists even more;
+    after sorting, we execute the main cycle which is running unless the last position is occupied (in that case all values from the
+    2D-list acceptable_values are erased)
     """
