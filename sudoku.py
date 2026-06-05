@@ -167,6 +167,7 @@ def count_in_column(q, i, j, temp, ListOfLists1, ListOfLists2):
         for n in range(len(ListOfLists1[position_index])):
             if ListOfLists1[position_index][n] == q:
                 count += 1
+    return count
 
 def count_in_cell(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
