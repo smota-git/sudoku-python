@@ -90,9 +90,14 @@ Simple console interface for browsing the built-in documentation.
 
 ---
 
-## Example
+## Providing a Puzzle
 
-The puzzle can be entered interactively through the console or provided directly as a NumPy array.
+The puzzle can be supplied either:
+
+- interactively through the console,
+- or directly as a NumPy array by editing the `init` variable near the end of `sudoku.py`.
+
+## Example
 
 Input:
 
