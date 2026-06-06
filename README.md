@@ -92,18 +92,26 @@ Simple console interface for browsing the built-in documentation.
 
 ## Example
 
-Input:
+The puzzle can be entered interactively through the console or provided directly as a NumPy array.
 
-```text
-530070000
-600195000
-098000060
-800060003
-400803001
-700020006
-060000280
-000419005
-000080079
+Input
+
+```python
+import numpy as np
+
+...
+
+init = np.array([
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+])
 ```
 
 Output:
