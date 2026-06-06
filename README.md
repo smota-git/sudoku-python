@@ -178,6 +178,5 @@ python sudoku.py
 Running in PyCharm
 
 Open the project in PyCharm and run `sudoku.py`.
-```
 
 
