@@ -92,10 +92,7 @@ Simple console interface for browsing the built-in documentation.
 
 ## Providing a Puzzle
 
-The puzzle can be supplied either:
-
-- interactively through the console,
-- or directly as a NumPy array by editing the `init` variable near the end of `sudoku.py`.
+The recommended way is to define the puzzle directly as a NumPy array in the `init` variable near the end of `sudoku.py`.
 
 ## Example
 
@@ -132,6 +129,8 @@ Output:
 287419635
 345286179
 ```
+
+An interactive console input mode is also available.
 
 ---
 
