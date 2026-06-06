@@ -94,7 +94,7 @@ Simple console interface for browsing the built-in documentation.
 
 The puzzle can be entered interactively through the console or provided directly as a NumPy array.
 
-Input
+Input:
 
 ```python
 import numpy as np
