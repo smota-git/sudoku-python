@@ -160,14 +160,16 @@ git clone https://github.com/smota-git/sudoku-python.git
 cd sudoku-python
 ```
 
-Run the solver:
+Running from the command line
 
 ```bash
-pysharm sudoku.py
+pip install -r requirements.txt
+python sudoku.py
 ```
 
-Install dependencies:
+Running in PyCharm
 
-```bash
-pip install numpy, time, copy
+Open the project in PyCharm and run `sudoku.py`.
 ```
+
+
