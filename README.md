@@ -148,3 +148,26 @@ Possible future extensions include:
 * support for Sudoku variants.
 
 These features were intentionally left outside the scope of the current project in order to keep the focus on the solving algorithm itself.
+
+---
+
+## How to Run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/smota-git/sudoku-python.git
+cd sudoku-python
+```
+
+Run the solver:
+
+```bash
+pysharm sudoku.py
+```
+
+Install dependencies:
+
+```bash
+pip install numpy, time, copy
+```
