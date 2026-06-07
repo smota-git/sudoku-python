@@ -186,6 +186,9 @@ Open the project in PyCharm and run `sudoku.py`.
 ---
 
 A C++ implementation of the same algorithm is also available:
+
 https://github.com/smota-git/sudoku
+
+The C++ version was developed first and served as the basis for this Python implementation.
 
 
