@@ -22,14 +22,14 @@ def insert_initial_values(initial_layout):
         while feedback != "y" and feedback != "n" and feedback != "yes" and feedback != "no":
             feedback = input()
         if feedback == "y" or feedback == "yes":
-            print('    "j" should be in interval <0,8>, choice of another value causes cancellation of this line (corresponding to given "i")\n')
+            cut(paste0('    "j" should be in interval <0,' maximal_value - 1,'>, choice of another value causes cancellation of this line (corresponding to given "i")\n'))
             while True:
                 j = int(input("    j = "))
                 if j < 0 or j > maximal_value - 1:
                     break
                 initial_layout[i, j] = input(f"    M({i},{j}) = ")
                 while True:
-                    if abs(initial_layout[i, j] - 5) <= 4:
+                    if 1 <= initial_layout[i, j] <= maximal_value:
                         break
                     initial_layout[i, j] = input()
                 print()
