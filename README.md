@@ -14,7 +14,7 @@ The project was created primarily as an exercise in algorithm design and logical
 
 ## Features
 
-* Solves standard 9×9 Sudoku puzzles.
+* By default, solves standard 9×9 Sudoku puzzles. Supports other square Sudoku sizes based on `sqrt_of_max`, such as 4×4, 9×9 or 16×16.
 * Generates candidate lists for empty cells.
 * Detects naked singles.
 * Detects hidden singles in rows, columns and 3×3 blocks.
@@ -62,6 +62,16 @@ The process continues until all positions are filled and a valid Sudoku solution
 The solver is intended for valid Sudoku puzzles having a unique solution.
 
 The goal of the project is solving such puzzles efficiently rather than analysing the number of possible solutions.
+
+## Grid Size
+
+The default setting is a standard 9×9 Sudoku grid.
+
+The solver can also be adapted to other square Sudoku sizes by changing the `sqrt_of_max` constant in the source code. For example:
+
+- `sqrt_of_max = 2` creates a 4×4 grid,
+- `sqrt_of_max = 3` creates a 9×9 grid,
+- `sqrt_of_max = 4` creates a 16×16 grid.
 
 ---
 
