@@ -148,7 +148,7 @@ def find_hidden_singles(temp, ListOfLists1, ListOfLists2):
     are the only admitting location of some digits within given row, column or subgrid (so-called hidden single)
 
     Parameters:
-    - temp (np.array): investigated number layout
+    - temp (np.array): investigated layout of digits
     - ListOfLists1 (2D list): list of candidates at particular positions
     - ListOfLists2 (2D list): coordinates of positions in list of candidates
     """
