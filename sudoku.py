@@ -44,7 +44,7 @@ def search_position_index(i, j, ListOfLists2):
     Parameters:
     - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
-    - ListOfLists2 (2D list): list of coordinates of positions in ordered vector of  candidates
+    - ListOfLists2 (2D list): list of coordinates of positions in ordered vector of candidates
 
     Output:
     - k (int): order number of position in current ordering
