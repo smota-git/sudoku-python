@@ -9,7 +9,7 @@ maximal_value = sqrt_of_max * sqrt_of_max
 
 def insert_initial_values(initial_layout):
     """
-    function for entry of initial conditions (assuming that they are not entered to code directly)
+    function for reading the initial Sudoku layout (assuming that it is not entered to code directly)
 
     Parameters:
     - initial_layout (np.array): initial layout of digits
@@ -18,18 +18,18 @@ def insert_initial_values(initial_layout):
 
     for i in range(maximal_value):
         print(f"  i = {i}:\n")
-        feedback = input('    Will you enter for concrete values of "j" (yes/no)? ')
+        feedback = input('    Will you enter for particular values of "j" (yes/no)? ')
         while feedback != "y" and feedback != "n" and feedback != "yes" and feedback != "no":
             feedback = input()
         if feedback == "y" or feedback == "yes":
-            cut(paste0('    "j" should be in interval <0,' maximal_value - 1,'>, choice of another value causes cancellation of this line (corresponding to given "i")\n'))
+            print('    "j" should be in interval <0,8>, choice of another value causes cancellation of this row (corresponding to given "i")\n')
             while True:
                 j = int(input("    j = "))
                 if j < 0 or j > maximal_value - 1:
                     break
                 initial_layout[i, j] = input(f"    M({i},{j}) = ")
                 while True:
-                    if 1 <= initial_layout[i, j] <= maximal_value:
+                    if abs(initial_layout[i, j] - 5) <= 4:
                         break
                     initial_layout[i, j] = input()
                 print()
@@ -39,12 +39,12 @@ def insert_initial_values(initial_layout):
 
 def search_position_index(i, j, ListOfLists2):
     """
-    function for searching of order number of position with given coordinates of position in corresponding composite vector
+    function for searching the index of a position with the specified coordinates in corresponding composite vector
 
     Parameters:
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
-    - ListOfLists2 (2D list): list of coordinates of positions in ordered vector of acceptable digits
+    - ListOfLists2 (2D list): list of coordinates of positions in ordered vector of  candidates
 
     Output:
     - k (int): order number of position in current ordering
@@ -54,13 +54,13 @@ def search_position_index(i, j, ListOfLists2):
         k += 1
     return k
 
-def can_be_in_line(q, i , j, ar):
+def can_be_in_row(q, i , j, ar):
     """
-    test if regarding the digits ordering in given LINE the given position can include a concrete digit
+    test whether the specified digit can be placed at the given position with respect to the current ROW
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
     - ar (np.array): investigated layout of digits
 
@@ -76,11 +76,11 @@ def can_be_in_line(q, i , j, ar):
 
 def can_be_in_column(q, i, j, ar):
     """
-    test if regarding the digits ordering in given COLUMN the given position can include a concrete digit
+    test whether the specified digit can be placed at the given position with respect to the current COLUMN
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
     - ar (np.array): investigated layout of digits
 
@@ -94,13 +94,13 @@ def can_be_in_column(q, i, j, ar):
             return False
     return True
 
-def can_be_in_cell(q, i, j, ar):
+def can_be_in_subgrid(q, i, j, ar):
     """
-    test if regarding the digits ordering in given CELL the given position can include a concrete digit
+    test whether the specified digit can be placed at the given position with respect to the current SUBGRID
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
     - ar (np.array): investigated layout of digits
 
@@ -117,17 +117,17 @@ def can_be_in_cell(q, i, j, ar):
                 return False
     return True
 
-def count_in_line(q, i, j, temp, ListOfLists1, ListOfLists2):
+def count_in_row(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
-    counting of number of positions in given LINE which can include a concrete digit
+    counts the positions in given ROW which can contain the specified digit
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
     - temp (np.array): investigated layout of digits
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
 
     Output:
     - count (int): number of positions with given property
@@ -145,15 +145,15 @@ def count_in_line(q, i, j, temp, ListOfLists1, ListOfLists2):
 
 def count_in_column(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
-    counting of number of positions in given COLUMN which can include a concrete digit
+    counts the positions in specified COLUMN which can contain the specified digit
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates row (from 0)
     - j (int): coordinates of column (from 0)
     - temp (np.array): investigated layout of digits
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
 
     Output:
     - count (int): number of positions with given property
@@ -167,30 +167,31 @@ def count_in_column(q, i, j, temp, ListOfLists1, ListOfLists2):
         for n in range(len(ListOfLists1[position_index])):
             if ListOfLists1[position_index][n] == q:
                 count += 1
+
     return count
 
-def count_in_cell(q, i, j, temp, ListOfLists1, ListOfLists2):
+def count_in_subgrid(q, i, j, temp, ListOfLists1, ListOfLists2):
     """
-    counting of number of positions in given CELL which can include a concrete digit
+    counts the positions in specified SUBGRID which can contain the specified digit
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
     - temp (np.array): investigated layout of digits
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
 
     Output:
     - count (int): number of positions with given property
     """
     count = 0
 
-    line_quotient = int(i / sqrt_of_max) * sqrt_of_max
+    row_quotient = int(i / sqrt_of_max) * sqrt_of_max
     column_quotient = int(j / sqrt_of_max) * sqrt_of_max
 
     for m in range(maximal_value):
-        needed_i = line_quotient + int(m / sqrt_of_max)
+        needed_i = row_quotient + int(m / sqrt_of_max)
         needed_j = column_quotient + m % sqrt_of_max
 
         if temp[needed_i, needed_j] != 0:
@@ -202,13 +203,13 @@ def count_in_cell(q, i, j, temp, ListOfLists1, ListOfLists2):
                  count += 1
     return count
 
-def interchange_vectors(a, b, ListOfLists):
+def swap_vectors(a, b, ListOfLists):
     """
-    interchange of components of 2D-vectors within bubblesort algorithm
+    swap components of 2D-vectors within bubble sort algorithm
 
     Parameters:
-    - a (int): order number of first interchanging position
-    - b (int): order number of second interchanging position
+    - a (int): order number of first swapped position
+    - b (int): order number of second swapped position
     - ListOfLists (2D list): sorting 2D-list
     """
     ListOfLists_a = cp.deepcopy(ListOfLists[a])
@@ -219,11 +220,11 @@ def interchange_vectors(a, b, ListOfLists):
 
 def bubblesort(ListOfLists1, ListOfLists2):
     """
-    algorithm bubblesort - it orders components (created by lists) of given 2D-lists according to the size (number of digits included in particular components)
+    bubble sort algorithm - it orders components (created by vectors) of given 2D-vectors according to the size (number of digits included in particular components)
 
     Parameters:
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
     """
     unsorted = True
     i = 0
@@ -232,22 +233,22 @@ def bubblesort(ListOfLists1, ListOfLists2):
         for j in range(len(ListOfLists1)-i-1):
             if len(ListOfLists1[j]) > len(ListOfLists1[j+1]):
                 unsorted = True
-                interchange_vectors(j, j + 1, ListOfLists1)
-                interchange_vectors(j, j + 1, ListOfLists2)
+                swap_vectors(j, j + 1, ListOfLists1)
+                swap_vectors(j, j + 1, ListOfLists2)
         i += 1
 
 def adjust_acceptable_values(q, i, j, ListOfLists1, ListOfLists2):
     """
-    during choice of digit for given position the corresponding number is erased here from list of acceptable digits for all other
-    positions located in the same line, column and cell; after that the components of corresponding 2D-lists whose size is eliminated
+    during choice of digit for given position the corresponding number is erased here from list of candidates for all other
+    positions located in the same row, column and subgrid; after that the components of corresponding 2D-lists whose size is eliminated
     are excluded
 
     Parameters:
     - q (int): investigated digit
-    - i (int): coordinates of line (from 0)
+    - i (int): coordinates of row (from 0)
     - j (int): coordinates of column (from 0)
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
     """
     PomList1 = []
     PomList2 = []
@@ -291,13 +292,13 @@ def adjust_acceptable_values(q, i, j, ListOfLists1, ListOfLists2):
 
 def find_hidden_singles(temp, ListOfLists1, ListOfLists2):
     """
-    next improvement: for the purpose of simplification on the base of found acceptable digits we search possible positions which
-    are the only admitting location of some digits within given line, column or cell (so-called hidden single)
+    next improvement: for the purpose of simplification on the base of found candidates we search possible positions which
+    are the only admitting location of some digits within given row, column or subgrid (so-called hidden single)
 
     Parameters:
-    - temp (np.array): investigated number layout
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - temp (np.array): investigated layout of digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
     """
     new_values = True
     while new_values:
@@ -318,34 +319,34 @@ def find_hidden_singles(temp, ListOfLists1, ListOfLists2):
                     if element_not_found:
                         continue
 
-                    one_in_line = count_in_line(q, i, j, temp, ListOfLists1, ListOfLists2) == 1
+                    one_in_row = count_in_row(q, i, j, temp, ListOfLists1, ListOfLists2) == 1
                     one_in_column = count_in_column(q, i, j, temp, ListOfLists1, ListOfLists2) == 1
-                    one_in_cell = count_in_cell(q, i, j, temp, ListOfLists1, ListOfLists2) == 1
+                    one_in_subgrid = count_in_subgrid(q, i, j, temp, ListOfLists1, ListOfLists2) == 1
 
-                    if (one_in_line or one_in_column or one_in_cell) and (len(ListOfLists1[position_index]) > 1):
+                    if (one_in_row or one_in_column or one_in_subgrid) and (len(ListOfLists1[position_index]) > 1):
                         ListOfLists1[position_index] = [q]
                         new_values = True
 
 def main_iteration(ar, ListOfLists1, ListOfLists2, ptemp_size, previous_temp, previous_acceptable_values, previous_index_order):
     """
-    main iteration: for improvement of calculation, initially, the 2D-lists of acceptable digits are ordered by size; next, the
+    main iteration: for improvement of calculation, initially, the 2D-lists of candidates are ordered by size; next, the
     function chooses the digit for filling the actual position and controls if for given choice some components corresponding to
-    not yet filled positions from the list of acceptable digits are not erased (which means that for actual choice of occupation
+    not yet filled positions from the list of candidates are not erased (which means that for actual choice of occupation
     of yet unfilled positions the task has no solution); if yes, we choose another digit (which undergoes the same control mechanism),
     if no, we first find possible hidden singles and if this does not corrupt the favorable case, the given digit layout is together
-    with list of acceptable digits (reduced by currently selected digit) added to alternates (this serves for the case that given
-    choice will not finally appear suitable in any of next iterations); if, finally, all acceptable digits corresponding to given
+    with list of candidates (reduced by currently selected digit) added to alternates (this serves for the case that given
+    choice will not finally appear suitable in any of next iterations); if, finally, all candidates corresponding to given
     position will not appear suitable we choose from alternates the last case when the digit was for any of the previous positions
     chosen from more possibilities and we choose the combination of parameters for next iteration together with layout of digits and
     list of acceptable possibilities corresponding to this previous situation
 
     Parameters:
     - ar (np.array): investigated layout of digits
-    - ListOfLists1 (2D list): list of acceptable digits at particular positions
-    - ListOfLists2 (2D list): coordinates of positions in list of acceptable digits
+    - ListOfLists1 (2D list): list of candidates at particular positions
+    - ListOfLists2 (2D list): coordinates of positions in list of candidates
     - ptemp_size (int): number of positions admitting alternating combinations of parameters for the case when we achieve the contradiction
     - previous_temp (3D list): layouts of digits corresponding to alternates
-    - previous_acceptable_values (3D list): acceptable digits corresponding to alternates
+    - previous_acceptable_values (3D list): candidates corresponding to alternates
     - previous_temp (3D list): coordinates to positions corresponding to alternates
 
     Output:
@@ -488,7 +489,7 @@ for index in range(maximal_value * maximal_value):
     if temp[i, j] == 0:
         for value_index in range(maximal_value):
             q = value_index + 1
-            if can_be_in_line(q, i, j, temp) * can_be_in_column(q, i, j, temp) * can_be_in_cell(q, i, j, temp):
+            if can_be_in_row(q, i, j, temp) * can_be_in_column(q, i, j, temp) * can_be_in_subgrid(q, i, j, temp):
                 acceptable_values_array.append(q)
         acceptable_values.append(acceptable_values_array)
         index_order.append([i, j])
